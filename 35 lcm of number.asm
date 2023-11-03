@@ -1,0 +1,33 @@
+CLC
+MOV BX,1100H 
+MOV DI,1120H 
+MOV AX,[BX] 
+MOV CX,[BX+2] 
+
+CALL GCD
+MOV AX,[BX] 
+MOV CX,[BX+2] 
+MUL CX
+DIV SI
+MOV [DI],AX
+ HLT
+
+GCD PROC NEAR 
+    RPT:
+    CMP AX,CX 
+    JE SAVE 
+    JNC SKIP
+    XCHG AX,CX 
+
+SKIP:
+    MOV DX,0000H 
+    DIV CX
+    CMP DX,0000H 
+    JE SAVE
+    MOV AX,DX 
+    JMP RPT 
+
+SAVE:
+    MOV SI,CX 
+    RET
+GCD ENDP

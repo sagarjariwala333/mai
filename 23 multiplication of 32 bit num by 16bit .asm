@@ -1,0 +1,23 @@
+M1 DW 2 DUP(?)
+
+
+N1 DW ?
+N2 DW 2 DUP(?)
+carry DW ?
+
+
+MOV N2,9234H 
+MOV N2+2,2345H 
+MOV N1,9
+
+MOV AX,N2 
+MUL N1
+MOV carry,DX 
+MOV M1,AX 
+MOV AX,N2+2 
+MUL N1
+ADD AX,carry 
+MOV carry,DX 
+MOV M1+2,AX
+
+HLT
